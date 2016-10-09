@@ -24,7 +24,7 @@ class Quotes extends CI_Model {
         array('id' => 12, 'name' => 'Canadian Bacon', 'mug' => '', 'recieving unit' => 20, 'cost' => 5.00, 'stocking unit' => 20, 'on hand' => 0)
     );
     
-    var $recepies = array(
+    var $recipes = array(
         array('id' => 1, 'description' => 'Egg, Cheese, English Muffin, Canadian Bacon', 'ingredients' => array(1, 5, 8, 12)),
         array('id' => 2, 'description' => 'Egg, Cheese, English Muffin, Sausage', 'ingredients' => array(1, 2, 5, 8)),
         array('id' => 3, 'description' => 'Bagel, Bacon, Tomato, Lettuce', 'ingredients' => array(3, 4, 10, 11)),
@@ -57,9 +57,9 @@ class Quotes extends CI_Model {
 	}
 
 	// retrieve all of the quotes
-	public function all()
+	public function getSupplies()
 	{
-		return $this->data;
+		return $this->supplies;
 	}
 
 }
