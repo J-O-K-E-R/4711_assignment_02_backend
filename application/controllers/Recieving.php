@@ -2,16 +2,15 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class First extends Application{
+class Recieving extends Application{
     
     function __construct(){
         parent::__construct();
     }
     
     public function index(){
-        $this->data['pagebody'] = 'justone';
-        
-        $this->data += $this->quotes->get(1);
+        $this->data['pagetitle'] = 'Recieving';
+        $this->data['pagebody'] = 'recieving';
 		$this->render();
     }
 }
