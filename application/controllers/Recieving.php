@@ -10,7 +10,7 @@ class Recieving extends Application{
     
     public function index(){
         // build the list of authors, to pass on to our view
-        $source = $this->quotes->getSupplies();
+        $source = $this->supplies->getSupplies();
         $supplies = array();
 
         foreach ($source as $supply)
