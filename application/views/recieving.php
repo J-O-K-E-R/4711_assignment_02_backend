@@ -4,7 +4,7 @@
         <form action="recieving" method="POST">
             <div class="row">
                 {supplies}
-                <div class="span4"><b>{name} x{stocking unit}:</b></div>
+                <div class="span4"><b>{name} x{items per container}:</b></div>
                 <input type="number" name="{name}" value="0" min="0" max="99">
                 {/supplies}
             </div>

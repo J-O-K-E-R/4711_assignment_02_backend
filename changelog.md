@@ -5,3 +5,4 @@ JB: Modified Quotes.php to act as data structure for ingredients, recipies, and 
 ML: Added placeholder pages for Homepage, Administrator, Sales, Production, and Recieving
 ML: Added display current stock functionality to recieving page
 JB: work on back end functions for editing stock
+JB: re-index some arrays for convienence, sales page

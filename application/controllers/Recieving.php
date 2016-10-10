@@ -20,7 +20,7 @@ class Recieving extends Application{
 
         foreach ($source as $supply)
         {
-            $supplies[] = array ('id' => $supply['id'], 'name' => $supply['name'], 'on hand' => $supply['on hand']);
+            $supplies[] = array ('id' => $supply['id'], 'name' => $supply['name'], 'on hand' => $supply['on hand'], 'items per container' => $supply['items per container']);
         }
         $this->data['supplies'] = $supplies;
 
