@@ -10,19 +10,37 @@
 class Supplies extends CI_Model {
 
 	var $supplies = array(
-        array('id' => 1, 'name' => 'Egg', 'mug' => '', 'recieving unit' => 10, 'cost' => 2.00, 'stocking unit' => 12, 'on hand' => 0),
-        array('id' => 2, 'name' => 'Sausage', 'mug' => '', 'recieving unit' => 10, 'cost' => 3.00, 'stocking unit' => 10, 'on hand' => 0),
-        array('id' => 3, 'name' => 'Bagel', 'mug' => '', 'recieving unit' => 20, 'cost' => 2.00, 'stocking unit' => 6, 'on hand' => 0),
-        array('id' => 4, 'name' => 'Bacon', 'mug' => '', 'recieving unit' => 15, 'cost' => 3.00, 'stocking unit' => 12, 'on hand' => 0),
-        array('id' => 5, 'name' => 'Cheese', 'mug' => '', 'recieving unit' => 40, 'cost' => 7.00, 'stocking unit' => 10, 'on hand' => 0),
-        array('id' => 6, 'name' => 'Hash Brown', 'mug' => '', 'recieving unit' => 20, 'cost' => 5.00, 'stocking unit' => 12, 'on hand' => 0),
-        array('id' => 7, 'name' => 'Coffee Beans', 'mug' => '', 'recieving unit' => 10, 'cost' => 10.00, 'stocking unit' => 5000, 'on hand' => 0),
-        array('id' => 8, 'name' => 'English Muffin', 'mug' => '', 'recieving unit' => 10, 'cost' => 5.00, 'stocking unit' => 6, 'on hand' => 0),
-        array('id' => 9, 'name' => 'Tortilla', 'mug' => '', 'recieving unit' => 20, 'cost' => 4.00, 'stocking unit' => 12, 'on hand' => 0),
-        array('id' => 10, 'name' => 'Tomato', 'mug' => '', 'recieving unit' => 20, 'cost' => 0.50, 'stocking unit' => 10, 'on hand' => 0),
-        array('id' => 11, 'name' => 'Lettuce', 'mug' => '', 'recieving unit' => 20, 'cost' => 2.00, 'stocking unit' => 20, 'on hand' => 0),
-        array('id' => 12, 'name' => 'Canadian Bacon', 'mug' => '', 'recieving unit' => 20, 'cost' => 5.00, 'stocking unit' => 20, 'on hand' => 0)
+        array('id' => 1, 'name' => 'Egg', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 2, 'name' => 'Sausage', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 3, 'name' => 'Bagel', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 4, 'name' => 'Bacon', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 5, 'name' => 'Cheese', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 6, 'name' => 'Hash Brown', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 7, 'name' => 'Coffee Beans', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 8, 'name' => 'English Muffin', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 9, 'name' => 'Tortilla', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 10, 'name' => 'Tomato', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 11, 'name' => 'Lettuce', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
+        array('id' => 12, 'name' => 'Canadian Bacon', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5);
     );
+    
+    public function orderSupplies($itemID){
+		$supplies[$itemID]['containers'] += $supplies[$itemID]['recieving unit'];
+	}
+	
+	public function createSock($stockID){
+		foreach ($recipies[$stockID]['ingredients'] as $id){
+            if ($supplies[$id]['on hand'] < 5){
+                $supplies[$id]['on hand'] += $supplies[$id]['items per container']; // open a container
+                $supplies[$id]['containers']--;
+            }
+			$supplies[$id]['on hand']--; // now a part of the stock
+            if($supplies[$id]['containers'] < 5){
+                orderSupplies($id); // get more
+            }
+		}
+		$stock[$stockID]['quantity']++;
+	}
 
 	// Constructor
 	public function __construct()
@@ -45,16 +63,4 @@ class Supplies extends CI_Model {
 	{
 		return $this->supplies;
 	}
-
-    //decrements supplies an handles subtracting from both 'on hand' and 'recieving unit' keys
-    public function decreaseSupplies($item)
-    {
-        $supply = $this->supplies->get($item);
-        
-        if($supply['on hand'] == 0)
-        {
-            $supply['on hand'] = $supply['stocking unit'];
-            $supply['recieving unit']--;
-        }
-    }
 }
