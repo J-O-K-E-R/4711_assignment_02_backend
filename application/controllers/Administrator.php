@@ -8,6 +8,8 @@ class Administrator extends Application{
         parent::__construct();
     }
     
+	// like all the other controllers, pulls data from the db, throws it into the view.
+	// do each one individually. 
     public function index(){
         $recipesData = $this->recipes->getRecipes();
         $recipes = array();

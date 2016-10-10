@@ -8,6 +8,7 @@ class Welcome extends Application{
 		parent::__construct();
 	}
 
+	// some mock data for now.  Not hooked up to anything.
 	public function index(){
         $this->data['pagetitle'] = 'Welcome';
 		$this->data['pagebody'] = 'homepage';

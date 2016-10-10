@@ -1,14 +1,11 @@
 <?php
 
 /**
- * This is a "CMS" model for quotes, but with bogus hard-coded data,
- * so that we don't have to worry about any database setup.
- * This would be considered a "mock database" model.
- *
- * @author jim
+ * Some stock, and accessors.  
  */
 class Stock extends CI_Model {
 
+	// the ID is zero indexed for easy access, and the recipe id's directly match up with the stock id's
 	var $stock = array(
         array('id' => 0, 'name' => 'Egg McMuffin', 'price' => 3.50, 'quantity' => 0),
         array('id' => 1, 'name' => 'Sausage McMuffin', 'price' => 4.00, 'quantity' => 0),
@@ -23,7 +20,7 @@ class Stock extends CI_Model {
 		parent::__construct();
 	}
 
-	// retrieve a single quote
+	// retrieve a single stock
 	public function get($which)
 	{
 		// iterate over the data until we find the one we want
@@ -33,7 +30,8 @@ class Stock extends CI_Model {
 		return null;
 	}
 
-	// retrieve all of the quotes
+	//some pun about stalking?  
+	// get all the stock for a access in the controllers.
 	public function getStock()
 	{
 		return $this->stock;

@@ -8,6 +8,8 @@ class Recieving extends Application{
         parent::__construct();
     }
     
+	// like all the other controllers, pulls data from the db, throws it into the view.
+	// this one posts to a log file, which serves as a record for now.
     public function index(){
         foreach($_POST as $key=>$value){
             if($value != '0') {

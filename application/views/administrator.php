@@ -1,3 +1,5 @@
+<!-- gross.  Organized into tables for easy layouts. -->
+
 <div class="span10 offset1">
     <table>
     {recipesRow}

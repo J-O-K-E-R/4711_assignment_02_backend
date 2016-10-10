@@ -1,11 +1,7 @@
 <?php
 
 /**
- * This is a "CMS" model for quotes, but with bogus hard-coded data,
- * so that we don't have to worry about any database setup.
- * This would be considered a "mock database" model.
- *
- * @author jim
+ * Supplies, and accessors.  Also, ways to update the 'database'.  Will be replaced once we have a database.
  */
 class Supplies extends CI_Model {
 
@@ -24,10 +20,13 @@ class Supplies extends CI_Model {
         array('id' => 12, 'name' => 'Canadian Bacon', 'on hand' => 0, 'containers per shipment' => 10, 'containers' => 0, 'items per container' => 10, 'cost' => 5)
     );
     
+	// increments the containers by the amount of containers in a pallet.
+	// should also do something with cost, but dont worry about it for now
     public function orderSupplies($itemID){
 		$supplies[$itemID]['containers'] += $supplies[$itemID]['recieving unit'];
 	}
 	
+	// logic!  check if we are running low, and then open containers or order more.
 	public function createSock($stockID){
 		foreach ($recipies[$stockID]['ingredients'] as $id){
             if ($supplies[$id]['on hand'] < 5){

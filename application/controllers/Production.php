@@ -8,6 +8,7 @@ class Production extends Application{
         parent::__construct();
     }
     
+	// like all the other controllers, pulls data from the db, throws it into the view.
     public function index(){
         
         $source = $this->recipes->getRecipes();

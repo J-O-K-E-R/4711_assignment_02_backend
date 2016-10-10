@@ -1,14 +1,11 @@
 <?php
 
 /**
- * This is a "CMS" model for quotes, but with bogus hard-coded data,
- * so that we don't have to worry about any database setup.
- * This would be considered a "mock database" model.
- *
- * @author jim
+ * Some recipes, and accessors.  
  */
 class Recipes extends CI_Model {
 
+	// the ID is zero indexed for easy access, and the recipe id's directly match up with the stock id's
 	var $recipes = array(
         array('id' => 0, 'name' => 'Egg McMuffin', 'description' => 'Egg, Cheese, English Muffin, Canadian Bacon', 'ingredients' => array(1, 5, 8, 12)),
         array('id' => 1, 'name' => 'Sausage McMuffin', 'description' => 'Egg, Cheese, English Muffin, Sausage', 'ingredients' => array(1, 2, 5, 8)),
@@ -38,5 +35,4 @@ class Recipes extends CI_Model {
 	{
 		return $this->recipes;
 	}
-
 }
