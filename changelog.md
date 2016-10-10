@@ -6,3 +6,4 @@ ML: Added placeholder pages for Homepage, Administrator, Sales, Production, and 
 ML: Added display current stock functionality to recieving page
 JB: work on back end functions for editing stock
 JB: re-index some arrays for convienence, sales page
+JB: admin page
