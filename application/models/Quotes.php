@@ -57,9 +57,9 @@ class Quotes extends CI_Model {
 	}
 
 	// retrieve all of the quotes
-	public function all()
+	public function getSupplies()
 	{
-		return $this->data;
+		return $this->supplies;
 	}
     
     //creates an stock item
