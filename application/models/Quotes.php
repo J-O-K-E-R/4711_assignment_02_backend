@@ -24,7 +24,7 @@ class Quotes extends CI_Model {
         array('id' => 12, 'name' => 'Canadian Bacon', 'mug' => '', 'recieving unit' => 20, 'cost' => 5.00, 'stocking unit' => 20, 'on hand' => 0)
     );
     
-    var $recepies = array(
+    var $recipes = array(
         array('id' => 1, 'description' => 'Egg, Cheese, English Muffin, Canadian Bacon', 'ingredients' => array(1, 5, 8, 12)),
         array('id' => 2, 'description' => 'Egg, Cheese, English Muffin, Sausage', 'ingredients' => array(1, 2, 5, 8)),
         array('id' => 3, 'description' => 'Bagel, Bacon, Tomato, Lettuce', 'ingredients' => array(3, 4, 10, 11)),
@@ -61,5 +61,31 @@ class Quotes extends CI_Model {
 	{
 		return $this->data;
 	}
+    
+    //creates an stock item
+    public function createStock($itemID)
+    {
+        //Gets whole array from recipes
+        $items = $this->recipes->all();;
+        //gets the ingredient KVP from the items array - doesn't actually work right now.
+        $ingredients = $items[$itemID]['ingredients'];
+        //for every item id in the recipes ingredients array, decrement the supplies
+        foreach ($ingredients as $ingredient)
+            decreaseSupplies($ingredient);
+        //increase the stock item by 1
+        $this->stock[$itemID]['quantity']++;
+    }
+    
+    //decrements supplies an handles subtracting from both 'on hand' and 'recieving unit' keys
+    public function decreaseSupplies($item)
+    {
+        $supply = $this->supplies->get($item);
+        
+        if($supply['on hand'] == 0)
+        {
+            $supply['on hand'] = $supply['stocking unit'];
+            $supply['recieving unit']--;
+        }
+    }
 
 }
