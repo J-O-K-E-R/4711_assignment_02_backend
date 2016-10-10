@@ -1,11 +1,7 @@
 <?php
 
 /**
- * This is a "CMS" model for quotes, but with bogus hard-coded data,
- * so that we don't have to worry about any database setup.
- * This would be considered a "mock database" model.
- *
- * @author jim
+ * This is a remnant, left it in here to not break anything.  Will remove in a future build.
  */
 class Quotes extends CI_Model {
     

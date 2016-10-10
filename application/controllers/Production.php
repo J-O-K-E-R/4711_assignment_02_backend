@@ -7,7 +7,8 @@ class Production extends Application{
     function __construct(){
         parent::__construct();
     }
-
+    
+	// like all the other controllers, pulls data from the db, throws it into the view.
     public function index(){
 
         foreach($_POST as $key=>$value){
