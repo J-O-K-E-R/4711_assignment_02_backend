@@ -62,6 +62,16 @@ class Quotes extends CI_Model {
 		return $this->supplies;
 	}
     
+    public function getRecipes()
+    {
+        return $this->recipes;
+    }
+    
+    public function getStock()
+    {
+        return $this->stock;
+    }
+    
     //creates an stock item
     public function createStock($itemID)
     {

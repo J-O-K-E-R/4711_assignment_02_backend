@@ -10,11 +10,11 @@
 class Recipes extends CI_Model {
 
 	var $recipes = array(
-        array('id' => 1, 'description' => 'Egg, Cheese, English Muffin, Canadian Bacon', 'ingredients' => array(1, 5, 8, 12)),
-        array('id' => 2, 'description' => 'Egg, Cheese, English Muffin, Sausage', 'ingredients' => array(1, 2, 5, 8)),
-        array('id' => 3, 'description' => 'Bagel, Bacon, Tomato, Lettuce', 'ingredients' => array(3, 4, 10, 11)),
-        array('id' => 4, 'description' => 'Totrilla, Sausage, Cheese, Hash Brown, Egg', 'ingredients' => array(9, 2, 5, 6, 1)),
-		array('id' => 5, 'description' => 'Coffee', 'ingredients' => array(7))
+        array('id' => 1, 'name' => 'Egg McMuffin', 'description' => 'Egg, Cheese, English Muffin, Canadian Bacon', 'ingredients' => array(1, 5, 8, 12)),
+        array('id' => 2, 'name' => 'Sausage McMuffin', 'description' => 'Egg, Cheese, English Muffin, Sausage', 'ingredients' => array(1, 2, 5, 8)),
+        array('id' => 3, 'name' => 'Bagel BLT', 'description' => 'Bagel, Bacon, Tomato, Lettuce', 'ingredients' => array(3, 4, 10, 11)),
+        array('id' => 4, 'name' => 'Sausage & Hash Brown Breakfast Wrap', 'description' => 'Totrilla, Sausage, Cheese, Hash Brown, Egg', 'ingredients' => array(9, 2, 5, 6, 1)),
+		array('id' => 5, 'name' => 'Coffee', 'description' => 'Coffee', 'ingredients' => array(7))
     );
 
 	// Constructor
