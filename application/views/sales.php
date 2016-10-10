@@ -1,5 +1,8 @@
 <div class="row">
     <div class="span8 offset1">
-        Test sales
+        
+        {sales}
+        <div class="span9"><b>{name}</b>, {description} for ${price}</div>
+        {/sales}
     </div>
 </div>

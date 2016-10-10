@@ -10,11 +10,11 @@
 class Stock extends CI_Model {
 
 	var $stock = array(
-        array('id' => 1, 'name' => 'Egg McMuffin', 'price' => 3.50, 'quantity' => 0),
-        array('id' => 2, 'name' => 'Sausage McMuffin', 'price' => 4.00, 'quantity' => 0),
-        array('id' => 3, 'name' => 'Bagel BLT', 'price' => 5.00, 'quantity' => 0),
-        array('id' => 4, 'name' => 'Sausage & Hash Brown Breakfast Wrap', 'price' => 5.50, 'quantity' => 0),
-        array('id' => 5, 'name' => 'Coffee', 'price' => 2.00, 'quantity' => 0),
+        array('id' => 0, 'name' => 'Egg McMuffin', 'price' => 3.50, 'quantity' => 0),
+        array('id' => 1, 'name' => 'Sausage McMuffin', 'price' => 4.00, 'quantity' => 0),
+        array('id' => 2, 'name' => 'Bagel BLT', 'price' => 5.00, 'quantity' => 0),
+        array('id' => 3, 'name' => 'Sausage & Hash Brown Breakfast Wrap', 'price' => 5.50, 'quantity' => 0),
+        array('id' => 4, 'name' => 'Coffee', 'price' => 2.00, 'quantity' => 0),
     );
 
 	// Constructor
