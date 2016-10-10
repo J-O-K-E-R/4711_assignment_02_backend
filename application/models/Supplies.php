@@ -7,9 +7,9 @@
  *
  * @author jim
  */
-class Quotes extends CI_Model {
-    
-    var $supplies = array(
+class Supplies extends CI_Model {
+
+	var $supplies = array(
         array('id' => 1, 'name' => 'Egg', 'mug' => '', 'recieving unit' => 10, 'cost' => 2.00, 'stocking unit' => 12, 'on hand' => 0),
         array('id' => 2, 'name' => 'Sausage', 'mug' => '', 'recieving unit' => 10, 'cost' => 3.00, 'stocking unit' => 10, 'on hand' => 0),
         array('id' => 3, 'name' => 'Bagel', 'mug' => '', 'recieving unit' => 20, 'cost' => 2.00, 'stocking unit' => 6, 'on hand' => 0),
@@ -23,22 +23,6 @@ class Quotes extends CI_Model {
         array('id' => 11, 'name' => 'Lettuce', 'mug' => '', 'recieving unit' => 20, 'cost' => 2.00, 'stocking unit' => 20, 'on hand' => 0),
         array('id' => 12, 'name' => 'Canadian Bacon', 'mug' => '', 'recieving unit' => 20, 'cost' => 5.00, 'stocking unit' => 20, 'on hand' => 0)
     );
-    
-    var $recipes = array(
-        array('id' => 1, 'description' => 'Egg, Cheese, English Muffin, Canadian Bacon', 'ingredients' => array(1, 5, 8, 12)),
-        array('id' => 2, 'description' => 'Egg, Cheese, English Muffin, Sausage', 'ingredients' => array(1, 2, 5, 8)),
-        array('id' => 3, 'description' => 'Bagel, Bacon, Tomato, Lettuce', 'ingredients' => array(3, 4, 10, 11)),
-        array('id' => 4, 'description' => 'Totrilla, Sausage, Cheese, Hash Brown, Egg', 'ingredients' => array(9, 2, 5, 6, 1)),
-		array('id' => 5, 'description' => 'Coffee', 'ingredients' => array(7))
-    );
-    
-    var $stock = array(
-        array('id' => 1, 'name' => 'Egg McMuffin', 'price' => 3.50, 'quantity' => 0),
-        array('id' => 2, 'name' => 'Sausage McMuffin', 'price' => 4.00, 'quantity' => 0),
-        array('id' => 3, 'name' => 'Bagel BLT', 'price' => 5.00, 'quantity' => 0),
-        array('id' => 4, 'name' => 'Sausage & Hash Brown Breakfast Wrap', 'price' => 5.50, 'quantity' => 0),
-        array('id' => 5, 'name' => 'Coffee', 'price' => 2.00, 'quantity' => 0),
-    );
 
 	// Constructor
 	public function __construct()
@@ -46,36 +30,22 @@ class Quotes extends CI_Model {
 		parent::__construct();
 	}
 
-	// retrieve a single quote
+	// retrieve a single supply
 	public function get($which)
 	{
 		// iterate over the data until we find the one we want
-		foreach ($this->data as $record)
+		foreach ($this->supplies as $record)
 			if ($record['id'] == $which)
 				return $record;
 		return null;
 	}
 
-	// retrieve all of the quotes
-	public function getSupplies()
+	// retrieve all of the supplies
+		public function getSupplies()
 	{
 		return $this->supplies;
 	}
-    
-    //creates an stock item
-    public function createStock($itemID)
-    {
-        //Gets whole array from recipes
-        $items = $this->recipes->all();;
-        //gets the ingredient KVP from the items array - doesn't actually work right now.
-        $ingredients = $items[$itemID]['ingredients'];
-        //for every item id in the recipes ingredients array, decrement the supplies
-        foreach ($ingredients as $ingredient)
-            decreaseSupplies($ingredient);
-        //increase the stock item by 1
-        $this->stock[$itemID]['quantity']++;
-    }
-    
+
     //decrements supplies an handles subtracting from both 'on hand' and 'recieving unit' keys
     public function decreaseSupplies($item)
     {
@@ -87,5 +57,4 @@ class Quotes extends CI_Model {
             $supply['recieving unit']--;
         }
     }
-
 }
