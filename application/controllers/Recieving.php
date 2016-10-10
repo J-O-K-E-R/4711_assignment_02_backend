@@ -9,13 +9,18 @@ class Recieving extends Application{
     }
     
     public function index(){
-        // build the list of authors, to pass on to our view
+        foreach($_POST as $key=>$value){
+            if($value != '0') {
+                file_put_contents(__DIR__ . '/../logs/recieving.log', "$value,$key\n", FILE_APPEND);
+            }
+        }
+        
         $source = $this->supplies->getSupplies();
         $supplies = array();
 
         foreach ($source as $supply)
         {
-            $supplies[] = array ('id' => $supply['id'], 'name' => $supply['name'], 'mug' => $supply['mug'], 'on hand' => $supply['on hand']);
+            $supplies[] = array ('id' => $supply['id'], 'name' => $supply['name'], 'on hand' => $supply['on hand']);
         }
         $this->data['supplies'] = $supplies;
 
