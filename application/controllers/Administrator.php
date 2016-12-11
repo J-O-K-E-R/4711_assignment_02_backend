@@ -15,7 +15,7 @@ class Administrator extends Application{
         $recipes = array();
         
         foreach($recipesData as $recipe){
-            $recipes[] = array('name' => $recipe['name'], 'description' => $recipe['description']);
+            $recipes[] = array('name' => $recipe->name);
         }
         
         $this->data['recipesRow'] = $recipes;
@@ -24,7 +24,7 @@ class Administrator extends Application{
         $stock = array();
         
         foreach($stockData as $stok){ // ran out of names
-            $stock[] = array('name' => $stok['name'], 'price' => $stok['price'], 'quantity' => $stok['quantity']);
+            $stock[] = array('name' => $stok->name, 'price' => $stok->price, 'quantity' => $stok->quantity);
         }
         
         $this->data['stockRow'] = $stock;
@@ -33,7 +33,7 @@ class Administrator extends Application{
         $supplies = array();
         
         foreach($suppliesData as $supply){
-            $supplies[] = array('name' => $supply['name'], 'on hand' => $supply['on hand'], 'containerspership' => $supply['containers per shipment'], 'containers' => $supply['containers'], 'itemspercontainer' => $supply['items per container'], 'cost' => $supply['cost'] );
+            $supplies[] = array('name' => $supply->name, 'on hand' => $supply->onHand, 'containerspership' => $supply->containersPerShipment, 'containers' => $supply->containers, 'itemspercontainer' => $supply->itemsPerContainer, 'cost' => $supply->cost );
         }
         
         $this->data['suppliesRow'] = $supplies;
