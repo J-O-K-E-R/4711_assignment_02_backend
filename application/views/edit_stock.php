@@ -1,4 +1,4 @@
-<form method="POST" action="/Administrator/edit_stock_done">
+<form method="POST" action="/Administrator/save_stock">
     <table class="table">
         <thead>
             <tr>
