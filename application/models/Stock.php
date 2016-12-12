@@ -51,7 +51,7 @@ class Stock extends CI_Model {
     }
     
     public function update($stock){
-        $sql = sprintf("UPDATE STOCK set name = %s, price = %d, quantity = %d where id = %d", $stock->name, $stock->price, $stock->quantity, $stock->id);
+        $sql = sprintf("UPDATE STOCK set name = '%s', price = %d, quantity = %d where id = %d", $stock->name, $stock->price, $stock->quantity, $stock->id);
         $this->db->query($sql);
     }
     
