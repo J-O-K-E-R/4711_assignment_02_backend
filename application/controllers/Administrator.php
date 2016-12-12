@@ -52,12 +52,13 @@ class Administrator extends Application{
 		$this->render();
     }
 
-    public function add_recipe(){
+    public function add_recipe($error = ""){
         $this->data['id'] = null;
         $this->data['name'] = null;
         $this->data['supplies'] = $this->supplies->getSupplies();
         $this->data['pagetitle'] = 'Add Recipe';
         $this->data['pagebody'] = 'edit_recipe';
+        $this->data['error'] = $error;
         $this->render();
     }
     public function save_recipe(){
@@ -70,6 +71,10 @@ class Administrator extends Application{
             if ($amount != 0) {
                 $ingredients[$supply->id] = $amount;
             }
+        }
+        if(trim($item->name) == null || trim($item->name) == "") {
+            $this->data['error'] = "Invalid inputs";
+            redirect('/administrator/add_recipe');
         }
         $this->recipes->createRecipe($item,$ingredients);
         redirect('/administrator/');
