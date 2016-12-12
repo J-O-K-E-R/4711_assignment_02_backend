@@ -33,4 +33,8 @@ class Recipes extends CI_Model {
         $query = $this->db->query($sql);
         return $query->result();
     }
+    
+    public function createRecipe($recipe, $ingredients){
+        
+    }
 }

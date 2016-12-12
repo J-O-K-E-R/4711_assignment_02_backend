@@ -18,18 +18,18 @@ class Supplies extends CI_Model {
 	}
 	
 	// logic!  check if we are running low, and then open containers or order more.
-	public function createSock($stockID){
-		foreach ($recipies[$stockID]['ingredients'] as $id){
+	public function createSock($supplyID){
+		foreach ($recipies[$supplyID]['ingredients'] as $id){
             if ($supplies[$id]['on hand'] < 5){
                 $supplies[$id]['on hand'] += $supplies[$id]['items per container']; // open a container
                 $supplies[$id]['containers']--;
             }
-			$supplies[$id]['on hand']--; // now a part of the stock
+			$supplies[$id]['on hand']--; // now a part of the supply
             if($supplies[$id]['containers'] < 5){
                 orderSupplies($id); // get more
             }
 		}
-		$stock[$stockID]['quantity']++;
+		$supply[$supplyID]['quantity']++;
 	}
 
 	// retrieve a single supply
@@ -47,4 +47,19 @@ class Supplies extends CI_Model {
         $query = $this->db->query($sql);
         return $query->result();
 	}
+    
+    public function create($supply){
+        $sql = sprintf("INSERT into SUPPLIES (name, onHand, containersPerShipment, containers, itemsPerContainer, cost) VALUES (%s, %d, %d, %d, %d, %d", $supply->name, $supply->onHand, $supply->containersPerShipment, $supply->containers, $supply->itemsPerContainer, $supply->cost);
+        $this->db->query($sql);
+    }
+    
+    public function update($supply){
+        $sql = sprintf("UPDATE SUPPLIES set name = %s, onHand = %d, containersPerShipment = %d, containers = %d, itemsPerContainer = %d, cost = %d where id = %d", $supply->name, $supply->onHand, $supply->containersPerShipment, $supply->containers, $supply->itemsPerContainer, $supply->cost, $supply->id);
+        $this->db->query($sql);
+    }
+    
+    public function delete($id){
+        $sql = sprintf("DELETE from SUPPLIES where id = %d", $id);
+        $this->db->query($sql);
+    }
 }

@@ -33,7 +33,7 @@ class Stock extends CI_Model {
     public function createStock($itemID)
     {
         //Gets whole array from recipes
-        $items = $this->recipes->all();;
+        $items = $this->recipes->all();
         //gets the ingredient KVP from the items array - doesn't actually work right now.
         $ingredients = $items[$itemID]['ingredients'];
         //for every item id in the recipes ingredients array, decrement the supplies
@@ -41,5 +41,20 @@ class Stock extends CI_Model {
             decreaseSupplies($ingredient);
         //increase the stock item by 1
         $this->stock[$itemID]['quantity']++;
+    }
+    
+    public function create($stock){
+        $sql = sprintf("INSERT into STOCK (name, price, quantity) VALUES (%s, %d, %d)", $stock->name, $stock->price, $stock->quantity);
+        $this->db->query($sql);
+    }
+    
+    public function update($stock){
+        $sql = sprintf("UPDATE STOCK set name = %s, price = %d, quantity = %d where id = %d", $stock->name, $stock->price, $stock->quantity, $stock->id);
+        $this->db->query($sql);
+    }
+    
+    public function delete($id){
+        $sql = sprintf("DELETE from STOCK where id = %d", $id);
+        $this->db->query($sql);
     }
 }
