@@ -46,7 +46,7 @@ class Stock extends CI_Model {
     }
     
     public function create($stock){
-        $sql = sprintf("INSERT into STOCK (name, price, quantity) VALUES (%s, %d, %d)", $stock->name, $stock->price, $stock->quantity);
+        $sql = sprintf("INSERT into STOCK (name, price, quantity) VALUES ('%s', %d, %d)", $stock->name, $stock->price, $stock->quantity);
         $this->db->query($sql);
     }
     
