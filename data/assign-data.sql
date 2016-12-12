@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 11, 2016 at 12:44 PM
+-- Generation Time: Dec 11, 2016 at 05:40 PM
 -- Server version: 5.6.32
 -- PHP Version: 5.6.25
 
@@ -36,11 +36,11 @@ CREATE TABLE `recipes` (
 --
 
 INSERT INTO `recipes` (`id`, `name`) VALUES
-(0, 'Egg McMuffin'),
-(1, 'Sausage McMuffin'),
-(2, 'Bagel BLT'),
-(3, 'Sausage & Hash Brown Breakfast Wrap'),
-(4, 'Coffee');
+(1, 'Egg McMuffin'),
+(2, 'Sausage McMuffin'),
+(3, 'Bagel BLT'),
+(4, 'Sausage & Hash Brown Breakfast Wrap'),
+(5, 'Coffee');
 
 -- --------------------------------------------------------
 
@@ -58,24 +58,24 @@ CREATE TABLE `recipesupplies` (
 --
 
 INSERT INTO `recipesupplies` (`recipeID`, `supplyID`) VALUES
-(0, 0),
-(0, 4),
-(0, 7),
-(0, 11),
-(1, 0),
 (1, 1),
-(1, 4),
-(1, 7),
+(1, 5),
+(1, 8),
+(1, 12),
+(2, 1),
 (2, 2),
-(2, 3),
-(2, 9),
-(2, 10),
-(3, 8),
-(3, 1),
+(2, 5),
+(2, 8),
+(3, 3),
 (3, 4),
-(3, 5),
-(3, 0),
-(4, 6);
+(3, 10),
+(3, 11),
+(4, 9),
+(4, 2),
+(4, 5),
+(4, 6),
+(4, 1),
+(5, 7);
 
 -- --------------------------------------------------------
 
@@ -95,11 +95,11 @@ CREATE TABLE `stock` (
 --
 
 INSERT INTO `stock` (`id`, `name`, `price`, `quantity`) VALUES
-(0, 'Egg McMuffin', 3.5, 0),
-(1, 'Sausage McMuffin', 4, 0),
-(2, 'Bagel BLT', 5, 0),
-(3, 'Sausage & Hash Brown Breakfast Wrap', 5.5, 0),
-(4, 'Coffee', 2, 0);
+(1, 'Egg McMuffin', 3.5, 0),
+(2, 'Sausage McMuffin', 4, 0),
+(3, 'Bagel BLT', 5, 0),
+(4, 'Sausage & Hash Brown Breakfast Wrap', 5.5, 0),
+(5, 'Coffee', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -122,18 +122,18 @@ CREATE TABLE `supplies` (
 --
 
 INSERT INTO `supplies` (`id`, `name`, `onHand`, `containersPerShipment`, `containers`, `itemsPerContainer`, `cost`) VALUES
-(0, 'Egg', '0', 20, 0, 12, 3),
-(1, 'Sausage', '0', 30, 0, 10, 7),
-(2, 'Bagel', '0', 30, 0, 6, 5),
-(3, 'Bacon', '0', 10, 0, 10, 5),
-(4, 'Cheese', '0', 10, 0, 10, 5),
-(5, 'Hash Brown', '0', 10, 0, 10, 5),
-(6, 'Coffee Beans', '0', 10, 0, 10, 5),
-(7, 'English Muffin', '0', 10, 0, 10, 5),
-(8, 'Tortilla', '0', 10, 0, 10, 5),
-(9, 'Tomato', '0', 10, 0, 10, 5),
-(10, 'Lettuce', '0', 10, 0, 10, 5),
-(11, 'Canadian Bacon', '0', 10, 0, 10, 5);
+(1, 'Egg', '0', 20, 0, 12, 3),
+(2, 'Sausage', '0', 30, 0, 10, 7),
+(3, 'Bagel', '0', 30, 0, 6, 5),
+(4, 'Bacon', '0', 10, 0, 10, 5),
+(5, 'Cheese', '0', 10, 0, 10, 5),
+(6, 'Hash Brown', '0', 10, 0, 10, 5),
+(7, 'Coffee Beans', '0', 10, 0, 10, 5),
+(8, 'English Muffin', '0', 10, 0, 10, 5),
+(9, 'Tortilla', '0', 10, 0, 10, 5),
+(10, 'Tomato', '0', 10, 0, 10, 5),
+(11, 'Lettuce', '0', 10, 0, 10, 5),
+(12, 'Canadian Bacon', '0', 10, 0, 10, 5);
 
 --
 -- Indexes for dumped tables
@@ -164,6 +164,25 @@ ALTER TABLE `stock`
 ALTER TABLE `supplies`
   ADD PRIMARY KEY (`id`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `recipes`
+--
+ALTER TABLE `recipes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `stock`
+--
+ALTER TABLE `stock`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `supplies`
+--
+ALTER TABLE `supplies`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Constraints for dumped tables
 --

@@ -7,10 +7,10 @@ class Toggle extends Application {
         $origin = $_SERVER['HTTP_REFERER'];
         $role = $this->session->userdata('userrole');
         if($role == 'user')
-            $role = 'admin';
-        else if($role == 'admin')
+            $role = 'administrator';
+        else if($role == 'administrator')
             $role = 'guest';
-        else
+        else if($role == 'guest')
             $role = 'user';
         $this->session->set_userdata('userrole', $role);
         redirect($origin);
