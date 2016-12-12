@@ -58,7 +58,11 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
+<<<<<<< HEAD
 $autoload['libraries'] = array('parser' , 'database' , 'session');
+=======
+$autoload['libraries'] = array('parser', 'database');
+>>>>>>> 984002cca22855eccfd5ef9a4f680211712e02c1
 
 /*
 | -------------------------------------------------------------------
@@ -132,5 +136,5 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('quotes', 'recipes', 'stock', 'supplies');
+$autoload['model'] = array('recipes', 'stock', 'supplies');
 

@@ -26,12 +26,17 @@ class Production extends Application{
         }
 
         $source = $this->recipes->getRecipes();
-
         $recipes = array();
 
         foreach ($source as $recipe)
         {
-            $recipes[] = array ('id' => $recipe['id'], 'name' => $recipe['name'], 'description' => $recipe['description'], 'ingredients' => $recipe['ingredients']);
+            $ingredients = $this->recipes->getRecipeDescriptions($recipe->id);
+            $strIngredients = "";
+            foreach($ingredients as $ingredient){
+                $strIngredients .= ' ' . $ingredient->name;
+            }
+            
+            $recipes[] = array ('name' => $recipe->name, 'description' => $strIngredients);
         }
         $this->data['recipes'] = $recipes;
 
