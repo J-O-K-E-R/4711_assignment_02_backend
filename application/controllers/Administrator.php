@@ -8,12 +8,8 @@ class Administrator extends Application{
         parent::__construct();
         $has_access = FALSE;
         $role = $this->session->userdata('userrole');
-        if($role == 'administrator') {
             $has_access = TRUE;
-        }
-        if($has_access == FALSE){
-            redirect('index.php');
-        }
+
     }
     
 	// like all the other controllers, pulls data from the db, throws it into the view.
@@ -60,22 +56,27 @@ class Administrator extends Application{
     public function delete_recipe($id = null){}
 
     public function add_stock(){}
-    public function add_stock_done(){}
+    public function add_stock_done(){
+        $item = array('id' => $id, 'name' => $name, 'price' => $price, 'quantity' => $quantity);
+        redirect('/administrator/');
+    }
     public function edit_stock($id = null){
         $item = $this->stock->get($id);
+        $this->data['id'] = $id;
         $this->data['name'] = $item->name;
         $this->data['price'] = $item->price;
         $this->data['quantity'] = $item->quantity;
-        $this->data['pagebody'] = 'admin_stock';
+        $this->data['pagetitle'] = 'Edit Stock';
+        $this->data['pagebody'] = 'edit_stock';
         $this->render();
     }
     public function edit_stock_done(){
-        $id = $this->input->post('id');
-        $name = $this->input->post('name');
-        $price = $this->input->post('price');
-        $qauntity = $this->input->post('qauntity');
-        $item = array('id' => $id, 'name' => $name, 'price' => $price, 'quantity' => $qauntity);
-        $this->stock->update();
+        $item = new stock();
+        $item->id = $this->input->post('id');
+        $item->name = $this->input->post('name');
+        $item->price = $this->input->post('price');
+        $item->quantity = $this->input->post('quantity');
+        $this->stock->update($item);
         redirect('/administrator/');
     }
     // done
