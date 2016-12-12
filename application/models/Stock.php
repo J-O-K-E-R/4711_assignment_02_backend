@@ -5,14 +5,6 @@
  */
 class Stock extends CI_Model {
 
-	// the ID is zero indexed for easy access, and the recipe id's directly match up with the stock id's
-	var $stock = array(
-        array('id' => 0, 'name' => 'Egg McMuffin', 'price' => 3.50, 'quantity' => 0),
-        array('id' => 1, 'name' => 'Sausage McMuffin', 'price' => 4.00, 'quantity' => 0),
-        array('id' => 2, 'name' => 'Bagel BLT', 'price' => 5.00, 'quantity' => 0),
-        array('id' => 3, 'name' => 'Sausage & Hash Brown Breakfast Wrap', 'price' => 5.50, 'quantity' => 0),
-        array('id' => 4, 'name' => 'Coffee', 'price' => 2.00, 'quantity' => 0),
-    );
 
 	// Constructor
 	public function __construct()
@@ -20,21 +12,21 @@ class Stock extends CI_Model {
 		parent::__construct();
 	}
 
-	// retrieve a single stock
-	public function get($which)
-	{
-		// iterate over the data until we find the one we want
-		foreach ($this->stock as $record)
-			if ($record['id'] == $which)
-				return $record;
-		return null;
-	}
-
 	//some pun about stalking?  
 	// get all the stock for a access in the controllers.
 	public function getStock()
 	{
-		return $this->stock;
+		$sql = sprintf("SELECT * from STOCK");
+        $query = $this->db->query($sql);
+        return $query->result();
+	}
+    
+    // retrieve a single stock
+	public function get($which)
+	{
+		$sql = sprintf("SELECT * from STOCK where ID = %d", $which);
+        $query = $this->db->query($sql);
+        return $query->result();
 	}
 
     //creates an stock item
