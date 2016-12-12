@@ -6,6 +6,14 @@ class Production extends Application{
 
     function __construct(){
         parent::__construct();
+        $has_access = FALSE;
+        $role = $this->session->userdata('userrole');
+        if($role == 'user' || $role == 'administrator') {
+            $has_access = TRUE;
+        }
+        if($has_access == FALSE){
+            redirect('index.php');
+        }
     }
     
 	// like all the other controllers, pulls data from the db, throws it into the view.
