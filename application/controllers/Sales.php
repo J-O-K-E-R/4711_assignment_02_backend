@@ -26,8 +26,8 @@ class Sales extends Application{
                 $strIngredients .= ' ' . $ingredient->name;
             }
                 
-            $stock = reset($this->stock->get($recipe->id));
-            $recipes[] = array('name' => $recipe->name, 'description' => $strIngredients, 'price' => $stock->price);
+            $stock = $this->stock->get($recipe->id);
+            $recipes[] = array('name' => $recipe->name, 'description' => $strIngredients, 'price' => reset($stock)->price);
         }
 
         $this->data['sales'] = $recipes;
