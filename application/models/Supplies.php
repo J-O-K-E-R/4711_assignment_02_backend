@@ -51,12 +51,12 @@ class Supplies extends CI_Model {
 	}
     
     public function create($supply){
-        $sql = sprintf("INSERT into SUPPLIES (name, onHand, containersPerShipment, containers, itemsPerContainer, cost) VALUES (%s, %d, %d, %d, %d, %d", $supply->name, $supply->onHand, $supply->containersPerShipment, $supply->containers, $supply->itemsPerContainer, $supply->cost);
+        $sql = sprintf("INSERT into SUPPLIES (name, onHand, containersPerShipment, containers, itemsPerContainer, cost) VALUES ('%s', %d, %d, %d, %d, %d)", $supply->name, $supply->onHand, $supply->containersPerShipment, $supply->containers, $supply->itemsPerContainer, $supply->cost);
         $this->db->query($sql);
     }
     
     public function update($supply){
-        $sql = sprintf("UPDATE SUPPLIES set name = %s, onHand = %d, containersPerShipment = %d, containers = %d, itemsPerContainer = %d, cost = %d where id = %d", $supply->name, $supply->onHand, $supply->containersPerShipment, $supply->containers, $supply->itemsPerContainer, $supply->cost, $supply->id);
+        $sql = sprintf("UPDATE SUPPLIES set name = '%s', onHand = %d, containersPerShipment = %d, containers = %d, itemsPerContainer = %d, cost = %d where id = %d", $supply->name, $supply->onHand, $supply->containersPerShipment, $supply->containers, $supply->itemsPerContainer, $supply->cost, $supply->id);
         $this->db->query($sql);
     }
     
