@@ -20,7 +20,7 @@ class Administrator extends Application{
             foreach($ingredients as $ingredient){
                 $strIngredients .= ' ' . $ingredient->name;
             }
-            $recipes[] = array('name' => $recipe->name, 'description' => $strIngredients);
+            $recipes[] = array('name' => $recipe->name, 'description' => $strIngredients, 'id' => $recipe->id);
         }
         
         $this->data['recipesRow'] = $recipes;
@@ -29,7 +29,7 @@ class Administrator extends Application{
         $stock = array();
         
         foreach($stockData as $stok){ // ran out of names
-            $stock[] = array('name' => $stok->name, 'price' => $stok->price, 'quantity' => $stok->quantity);
+            $stock[] = array('name' => $stok->name, 'price' => $stok->price, 'quantity' => $stok->quantity, 'id' => $stok->id);
         }
         
         $this->data['stockRow'] = $stock;
@@ -38,7 +38,7 @@ class Administrator extends Application{
         $supplies = array();
         
         foreach($suppliesData as $supply){
-            $supplies[] = array('name' => $supply->name, 'on hand' => $supply->onHand, 'containerspership' => $supply->containersPerShipment, 'containers' => $supply->containers, 'itemspercontainer' => $supply->itemsPerContainer, 'cost' => $supply->cost );
+            $supplies[] = array('name' => $supply->name, 'on hand' => $supply->onHand, 'containerspership' => $supply->containersPerShipment, 'containers' => $supply->containers, 'itemspercontainer' => $supply->itemsPerContainer, 'cost' => $supply->cost, 'id' => $supply->id);
         }
         
         $this->data['suppliesRow'] = $supplies;
@@ -47,4 +47,15 @@ class Administrator extends Application{
         $this->data['pagebody'] = 'administrator';
 		$this->render();
     }
+
+    public function add_recipe(){}
+    public function delete_recipe($id = null){}
+
+    public function add_stock(){}
+    public function edit_stock($id = null){}
+    public function delete_stock($id = null){}
+
+    public function add_supply(){}
+    public function edit_supply($id = null){}
+    public function delete_supply($id = null){}
 }
