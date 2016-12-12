@@ -37,7 +37,9 @@ class Supplies extends CI_Model {
 	{
         $sql = sprintf("SELECT * from SUPPLIES where ID = %d", $which);
         $query = $this->db->query($sql);
-        return $query->result();
+        $result = $query->result();
+        $reset = reset($result);
+        return $reset;
 	}
 
 	// retrieve all of the supplies

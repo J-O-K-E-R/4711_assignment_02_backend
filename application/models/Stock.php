@@ -26,7 +26,9 @@ class Stock extends CI_Model {
 	{
 		$sql = sprintf("SELECT * from STOCK where ID = %d", $which);
         $query = $this->db->query($sql);
-        return $query->result();
+        $result = $query->result();
+        $reset = reset($result);
+        return $reset;
 	}
 
     //creates an stock item
