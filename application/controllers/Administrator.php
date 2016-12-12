@@ -19,7 +19,7 @@ class Administrator extends Application{
         $recipes = array();
         
         foreach($recipesData as $recipe){
-            $ingredients = $this->recipes->getRecipeDescriptions($recipe->id);
+            $ingredients = $this->recipes->getIngredients($recipe->id);
             $strIngredients = "";
             foreach($ingredients as $ingredient){
                 $strIngredients .= ' ' . $ingredient->name;
