@@ -36,7 +36,22 @@ class Recipes extends CI_Model {
         return $query->result();
     }
     
-    public function createRecipe($recipe, $ingredients){
-        
+    public function createRecipe($recipe){
+        // create that entry
+        $sql1 = sprintf("INSERT into RECIPES (name) VALUES ('%s')", $recipe->name);
+        $this->db->query($sql);
+    }
+    
+    public function addIngredients($recipeID, $ingredients){
+        $sql = "INSERT into RECIPESUPPLIES (recipeID, supplyID) VALUES ";
+        $first = TRUE;
+        foreach($ingredients as $ingredient){
+            if ($first == TRUE){
+                $first = FALSE;
+            } else {
+                $sql .= ","
+            }
+            $sql .= sprintf("(%d, %d)", $recipeID, $ingredient->id);
+        }
     }
 }

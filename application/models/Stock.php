@@ -5,7 +5,6 @@
  */
 class Stock extends CI_Model {
 
-
 	// Constructor
 	public function __construct()
 	{
