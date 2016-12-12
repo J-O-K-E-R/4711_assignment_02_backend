@@ -14,12 +14,13 @@ class Supplies extends CI_Model {
 	// increments the containers by the amount of containers in a pallet.
 	// should also do something with cost, but dont worry about it for now
     public function orderSupplies($itemID){
-		$supplies[$itemID]['containers'] += $supplies[$itemID]['recieving unit'];
+        $sql = sprintf("UPDATE SUPPLIES set containers = containers += containersPerShipment where id = %d", $itemID);
+        $this->db->query($sql);
 	}
 	
-	// logic!  check if we are running low, and then open containers or order more.
-	public function createSock($supplyID){
-		foreach ($recipies[$supplyID]['ingredients'] as $id){
+	// keeping this here for now, this worked with the old stuff
+	public function openContainers($supplyID){
+        foreach ($recipies[$supplyID]['ingredients'] as $id){
             if ($supplies[$id]['on hand'] < 5){
                 $supplies[$id]['on hand'] += $supplies[$id]['items per container']; // open a container
                 $supplies[$id]['containers']--;
@@ -31,6 +32,11 @@ class Supplies extends CI_Model {
 		}
 		$supply[$supplyID]['quantity']++;
 	}
+    
+    public function openContainer($supplyID){
+        $sql = sprintf("UPDATE SUPPLIES set onHand = onHand += itemsPerContainer, containers -= 1 where id = %d", $supplyID);
+        $this->db->query($sql);
+    }
 
 	// retrieve a single supply
 	public function get($which)
