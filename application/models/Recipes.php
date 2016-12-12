@@ -49,7 +49,7 @@ class Recipes extends CI_Model {
             if ($first == TRUE){
                 $first = FALSE;
             } else {
-                $sql .= ","
+                $sql .= ",";
             }
             $sql .= sprintf("(%d, %d, %d)", $recipeID, $ingredient->id, $ingredient->amount);
         }
