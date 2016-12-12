@@ -10,6 +10,7 @@ class Sales extends Application{
     
 	// like all the other controllers, pulls data from the db, throws it into the view.
     public function index(){
+        $this->load->helper('url');
         foreach($_POST as $key=>$value){
             if($value != '0') {
                 file_put_contents(__DIR__ . '/../logs/sales.log', "$value,$key\n", FILE_APPEND);

@@ -19,6 +19,7 @@ class Recieving extends Application{
 	// like all the other controllers, pulls data from the db, throws it into the view.
 	// this one posts to a log file, which serves as a record for now.
     public function index(){
+        $this->load->helper('url');
         foreach($_POST as $key=>$value){
             if($value != '0') {
                 file_put_contents(__DIR__ . '/../logs/recieving.log', "$value,$key\n", FILE_APPEND);

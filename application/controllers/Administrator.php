@@ -6,6 +6,7 @@ class Administrator extends Application{
     
     function __construct(){
         parent::__construct();
+
         $has_access = FALSE;
         $role = $this->session->userdata('userrole');
             $has_access = TRUE;
@@ -15,6 +16,7 @@ class Administrator extends Application{
 	// like all the other controllers, pulls data from the db, throws it into the view.
 	// do each one individually. 
     public function index(){
+        $this->load->helper('url');
         $recipesData = $this->recipes->getRecipes();
         $recipes = array();
         
