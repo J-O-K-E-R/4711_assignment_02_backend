@@ -1,4 +1,5 @@
 <form method="POST" action="/Administrator/save_supply">
+    <p>{error}</p>
     <table class="table">
         <thead>
             <tr>
