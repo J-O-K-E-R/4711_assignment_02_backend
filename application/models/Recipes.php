@@ -16,7 +16,9 @@ class Recipes extends CI_Model {
 	{
         $sql = sprintf("SELECT * from RECIPES where ID = %d", $which);
         $query = $this->db->query($sql);
-        return $query->result();
+        $result = $query->result();
+        $reset = reset($result);
+        return $reset;
 	}
 
 	// get the recipes, what more do you want from me
