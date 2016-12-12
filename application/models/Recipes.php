@@ -30,7 +30,7 @@ class Recipes extends CI_Model {
 	}
     
     // get the ingredients (description) of a single recipe
-    public function getRecipeDescriptions($recipeID){
+    public function getIngredients($recipeID){
         $sql = sprintf("SELECT supplies.name from SUPPLIES inner join RECIPESUPPLIES on SUPPLIES.id = RECIPESUPPLIES.supplyID inner join RECIPES on RECIPESUPPLIES.recipeID = RECIPES.ID where recipeID = %d", $recipeID);
         $query = $this->db->query($sql);
         return $query->result();
@@ -51,7 +51,7 @@ class Recipes extends CI_Model {
             } else {
                 $sql .= ","
             }
-            $sql .= sprintf("(%d, %d)", $recipeID, $ingredient->id);
+            $sql .= sprintf("(%d, %d, %d)", $recipeID, $ingredient->id, $ingredient->amount);
         }
     }
 }
