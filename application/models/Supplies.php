@@ -17,25 +17,10 @@ class Supplies extends CI_Model {
         $sql = sprintf("UPDATE SUPPLIES set containers = containers += containersPerShipment where id = %d", $itemID);
         $this->db->query($sql);
 	}
-	
-	// keeping this here for now, this worked with the old stuff
-	public function openContainers($supplyID){
-        foreach ($recipies[$supplyID]['ingredients'] as $id){
-            if ($supplies[$id]['on hand'] < 5){
-                $supplies[$id]['on hand'] += $supplies[$id]['items per container']; // open a container
-                $supplies[$id]['containers']--;
-            }
-			$supplies[$id]['on hand']--; // now a part of the supply
-            if($supplies[$id]['containers'] < 5){
-                orderSupplies($id); // get more
-            }
-		}
-		$supply[$supplyID]['quantity']++;
-	}
-    
+	    
     // decrement the amount of containers of a supply, and increase the onhand
     public function openContainer($supplyID){
-        $sql = sprintf("UPDATE SUPPLIES set onHand = onHand += itemsPerContainer, containers -= 1 where id = %d", $supplyID);
+        $sql = sprintf("UPDATE SUPPLIES set onHand += itemsPerContainer, containers -= 1 where id = %d", $supplyID);
         $this->db->query($sql);
     }
 

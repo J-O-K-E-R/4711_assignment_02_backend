@@ -43,9 +43,20 @@ class Stock extends CI_Model {
         //increase the stock item by 1
         $this->stock[$itemID]['quantity']++;
     }
-    
-    public function assembleStock($stockID){
         
+    public function buildStock($stockID){
+        $sql = spritnf("UPDATE supplies s INNER JOIN recipesupplies rs ON rs.supplyID = s.id SET s.onhand = (s.onhand - rs.amount) WHERE  rs.recipeid = %d", $stockID);
+        $this->db->query($sql);
+        
+        $sql2 = sprintf("UPDATE stock SET quantity = quantity + 1 where id = %d", $stockID);
+        $this->db->query($sql2);
+    }
+    
+    public function sellStock($stockID){
+        $sql = sprintf("UPDATE stock SET quantity = quantity - 1 where id = %d", $stockID);
+        $this->db->query($sql);
+        
+        // do xml selling thing here
     }
     
     // takes a stock object that looks like it does in the db, runs sql query
