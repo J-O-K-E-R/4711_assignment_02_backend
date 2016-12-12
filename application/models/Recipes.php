@@ -14,7 +14,9 @@ class Recipes extends CI_Model {
 	// retrieve a single recipe
 	public function get($which)
 	{
-		return  null;//$this->db->query("SELECT * from RECIPES where id = " . $which);
+        $sql = sprintf("SELECT * from RECIPES where ID = %d", $which);
+        $query = $this->db->query($sql);
+        return $query->result();
 	}
 
 	// get the recipes, what more do you want from me
@@ -25,8 +27,10 @@ class Recipes extends CI_Model {
 		return $query->result();
 	}
     
+    // get the ingredients (description) of a single recipe
     public function getRecipeDescriptions($recipeID){
-        "SELECT supplies.name from SUPPLIES inner join RECIPES on RECIPES.id = RECIPESUPPLIES.recipeID inner join STOCK on RECIPESUPPIES.supplyID = SUPPLIES.ID";
-        $sql = sprintf("SELECT name from SUPPLIES where supplyID = ")
+        $sql = sprintf("SELECT supplies.name from SUPPLIES inner join RECIPESUPPLIES on SUPPLIES.id = RECIPESUPPLIES.supplyID inner join RECIPES on RECIPESUPPLIES.recipeID = RECIPES.ID where recipeID = %d", $recipeID);
+        $query = $this->db->query($sql);
+        return $query->result();
     }
 }

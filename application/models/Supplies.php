@@ -35,12 +35,16 @@ class Supplies extends CI_Model {
 	// retrieve a single supply
 	public function get($which)
 	{
-		return $this->db->get($which);
+        $sql = sprintf("SELECT * from SUPPLIES where ID = %d", $which);
+        $query = $this->db->query($sql);
+        return $query->result();
 	}
 
 	// retrieve all of the supplies
 		public function getSupplies()
 	{
-		return $this->supplies;
+		$sql = sprintf("SELECT * from SUPPLIES");
+        $query = $this->db->query($sql);
+        return $query->result();
 	}
 }

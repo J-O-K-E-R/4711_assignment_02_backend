@@ -12,17 +12,21 @@ class Stock extends CI_Model {
 		parent::__construct();
 	}
 
-	// retrieve a single stock
-	public function get($which)
-	{
-		return $this->db->get($which);
-	}
-
 	//some pun about stalking?  
 	// get all the stock for a access in the controllers.
 	public function getStock()
 	{
-		return $this->stock;
+		$sql = sprintf("SELECT * from STOCK");
+        $query = $this->db->query($sql);
+        return $query->result();
+	}
+    
+    // retrieve a single stock
+	public function get($which)
+	{
+		$sql = sprintf("SELECT * from STOCK where ID = %d", $which);
+        $query = $this->db->query($sql);
+        return $query->result();
 	}
 
     //creates an stock item

@@ -15,7 +15,12 @@ class Administrator extends Application{
         $recipes = array();
         
         foreach($recipesData as $recipe){
-            $recipes[] = array('name' => $recipe->name);
+            $ingredients = $this->recipes->getRecipeDescriptions($recipe->id);
+            $strIngredients = "";
+            foreach($ingredients as $ingredient){
+                $strIngredients .= ' ' . $ingredient->name;
+            }
+            $recipes[] = array('name' => $recipe->name, 'description' => $strIngredients);
         }
         
         $this->data['recipesRow'] = $recipes;
