@@ -55,10 +55,14 @@ class Administrator extends Application{
     public function add_recipe(){}
     public function delete_recipe($id = null){}
 
-    public function add_stock(){}
-    public function add_stock_done(){
-        $item = array('id' => $id, 'name' => $name, 'price' => $price, 'quantity' => $quantity);
-        redirect('/administrator/');
+    public function add_stock(){
+        $this->data['id'] = null;
+        $this->data['name'] = null;
+        $this->data['price'] = null;
+        $this->data['quantity'] = null;
+        $this->data['pagetitle'] = 'Add Stock';
+        $this->data['pagebody'] = 'edit_stock';
+        $this->render();
     }
     public function edit_stock($id = null){
         $item = $this->stock->get($id);
@@ -70,16 +74,19 @@ class Administrator extends Application{
         $this->data['pagebody'] = 'edit_stock';
         $this->render();
     }
-    public function edit_stock_done(){
+    public function save_stock(){
         $item = new stock();
         $item->id = $this->input->post('id');
         $item->name = $this->input->post('name');
         $item->price = $this->input->post('price');
         $item->quantity = $this->input->post('quantity');
-        $this->stock->update($item);
+        if ($item->id == null) {
+            $this->stock->create($item);
+        } else {
+            $this->stock->update($item);
+        }
         redirect('/administrator/');
     }
-    // done
     public function delete_stock($id = null){
         $this->stock->delete($id);
         redirect('/administrator/', 'refresh');
