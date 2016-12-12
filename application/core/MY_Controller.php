@@ -30,6 +30,7 @@ class Application extends CI_Controller
         if($this->data['userrole'] == NULL)
         {
             $this->data['userrole'] = 'guest';
+            $this->session->set_userdata('userrole', 'guest');
         }
     }
 
