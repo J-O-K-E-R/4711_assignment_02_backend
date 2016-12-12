@@ -9,7 +9,12 @@ class Administrator extends Application{
 
         $has_access = FALSE;
         $role = $this->session->userdata('userrole');
+        if($role == 'user' || $role == 'administrator') {
             $has_access = TRUE;
+        }
+        if($has_access == FALSE){
+            redirect('index.php');
+        }
 
     }
     
