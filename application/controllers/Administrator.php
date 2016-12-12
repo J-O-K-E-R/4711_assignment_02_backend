@@ -60,8 +60,30 @@ class Administrator extends Application{
     public function delete_recipe($id = null){}
 
     public function add_stock(){}
-    public function edit_stock($id = null){}
-    public function delete_stock($id = null){}
+    public function add_stock_done(){}
+    public function edit_stock($id = null){
+        $item = $this->stock->get($id);
+        $this->data['name'] = $item->name;
+        $this->data['price'] = $item->price;
+        $this->data['quantity'] = $item->quantity;
+        $this->data['pagebody'] = 'admin_stock';
+        $this->render();
+    }
+    public function edit_stock_done(){
+        $id = $this->input->post('id');
+        $name = $this->input->post('name');
+        $price = $this->input->post('price');
+        $qauntity = $this->input->post('qauntity');
+        $item = array('id' => $id, 'name' => $name, 'price' => $price, 'quantity' => $qauntity);
+        $this->stock->update();
+        redirect('/administrator/');
+    }
+    // done
+    public function delete_stock($id = null){
+        $this->stock->delete($id);
+        redirect('/administrator/', 'refresh');
+    }
+
 
     public function add_supply(){}
     public function edit_supply($id = null){}
