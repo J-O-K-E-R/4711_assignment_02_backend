@@ -52,7 +52,11 @@ class Administrator extends Application{
 		$this->render();
     }
 
-    public function add_recipe(){}
+    public function add_recipe(){
+        $this->data['pagetitle'] = 'Add Recipe';
+        $this->data['pagebody'] = 'add_recipe';
+        $this->render();
+    }
     public function delete_recipe($id = null){}
 
     public function add_stock(){
