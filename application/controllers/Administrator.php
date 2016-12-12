@@ -52,12 +52,13 @@ class Administrator extends Application{
 		$this->render();
     }
 
-    public function add_recipe(){
+    public function add_recipe($error = ""){
         $this->data['id'] = null;
         $this->data['name'] = null;
         $this->data['supplies'] = $this->supplies->getSupplies();
         $this->data['pagetitle'] = 'Add Recipe';
         $this->data['pagebody'] = 'edit_recipe';
+        $this->data['error'] = $error;
         $this->render();
     }
     public function save_recipe(){
@@ -71,6 +72,10 @@ class Administrator extends Application{
                 $ingredients[$supply->id] = $amount;
             }
         }
+        if(trim($item->name) == null || trim($item->name) == "") {
+            $this->data['error'] = "Invalid inputs";
+            redirect('/administrator/add_recipe');
+        }
         $this->recipes->createRecipe($item,$ingredients);
         redirect('/administrator/');
     }
@@ -79,13 +84,14 @@ class Administrator extends Application{
         redirect('/administrator/', 'refresh');
     }
 
-    public function add_stock(){
+    public function add_stock($error = ""){
         $this->data['id'] = null;
         $this->data['name'] = null;
         $this->data['price'] = null;
         $this->data['quantity'] = null;
         $this->data['pagetitle'] = 'Add Stock';
         $this->data['pagebody'] = 'edit_stock';
+        $this->data['error'] = $error;
         $this->render();
     }
     public function edit_stock($id = null){
@@ -104,19 +110,24 @@ class Administrator extends Application{
         $item->name = $this->input->post('name');
         $item->price = $this->input->post('price');
         $item->quantity = $this->input->post('quantity');
-        if ($item->id == null) {
+        if(trim($item->name) == null || trim($item->name) == "" || trim($item->price) == null || !is_numeric($item->price)|| trim($item->price) == "" || trim($item->quantity) == null || trim($item->quantity) == "" || !is_numeric($item->quantity)) {
+            $this->data['error'] = "Invalid inputs";
+            redirect('/administrator/add_stock');
+        }
+        else if ($item->id == null) {
             $this->stock->create($item);
         } else {
             $this->stock->update($item);
         }
-        redirect('/administrator/');
+        redirect('/administrator/', 'refresh');
     }
+
     public function delete_stock($id = null){
         $this->stock->delete($id);
         redirect('/administrator/', 'refresh');
     }
 
-    public function add_supply(){
+    public function add_supply($error = ""){
         $this->data['id'] = null;
         $this->data['name'] = null;
         $this->data['onHand'] = null;
@@ -126,6 +137,7 @@ class Administrator extends Application{
         $this->data['cost'] = null;
         $this->data['pagetitle'] = 'Add Supply';
         $this->data['pagebody'] = 'edit_supply';
+        $this->data['error'] = $error;
         $this->render();
     }
     public function edit_supply($id = null){
@@ -150,7 +162,12 @@ class Administrator extends Application{
         $item->containers = $this->input->post('containers');
         $item->itemsPerContainer = $this->input->post('itemsPerContainer');
         $item->cost = $this->input->post('cost');
-        if ($item->id == null) {
+
+        if(trim($item->name) == null || trim($item->name) == "" || trim($item->onHand) == null || trim($item->onHand) == "" || !is_numeric($item->onHand) || trim($item->containersPerShipment) == null || trim($item->containersPerShipment) =="" || !is_numeric($item->containersPerShipment) || trim($item->containers) == null || trim($item->containers) == "" || !is_numeric($item->containers) || trim($item->itemsPerContainer) == null || trim($item->itemsPerContainer) == "" || !is_numeric($item->itemsPerContainer) || trim($item->cost) == null || trim($item->cost) == "" || !is_numeric($item->cost)) {
+                $this->data['error'] = "Invalid inputs";
+                redirect('/administrator/add_supply');
+                    }
+        else if ($item->id == null) {
             $this->supplies->create($item);
         } else {
             $this->supplies->update($item);
