@@ -39,4 +39,14 @@ class Recieving extends Application{
         $this->data['pagebody'] = 'recieving';
 		$this->render();
     }
+
+    public function recieve(){
+    	foreach ($this->supplies->getSupplies() as $supply) {
+    		$amount = $this->input->post($supply->name);
+    		if ($amount > 0) {
+    			$this->supplies->orderSupplies($supply->id,$amount);
+    		}
+    	}
+    	redirect('index.php');
+    }
 }

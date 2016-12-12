@@ -1,7 +1,7 @@
 <div class="row">
     <div class="span8 offset1">
         <h2>Supplies to recieve</h2>
-        <form action="recieving" method="POST">
+        <form method="POST" action="/Recieving/recieve">
             <div class="row">
               {supplies}
               <div id="row">

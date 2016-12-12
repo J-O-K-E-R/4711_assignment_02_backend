@@ -35,7 +35,7 @@ class Supplies extends CI_Model {
 	}
 
 	// retrieve all of the supplies
-		public function getSupplies()
+	public function getSupplies()
 	{
 		$sql = sprintf("SELECT * from SUPPLIES");
         $query = $this->db->query($sql);
