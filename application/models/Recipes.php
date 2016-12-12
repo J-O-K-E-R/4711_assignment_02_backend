@@ -38,21 +38,21 @@ class Recipes extends CI_Model {
     
     public function createRecipe($recipe, $ingredients){
         // create that entry
-        $sql1 = sprintf("INSERT into RECIPES (name) VALUES ('%s')", $recipe->name);
-        $this->db->query($sql1);
+        $sql = sprintf("INSERT into RECIPES (name) VALUES ('%s')", $recipe->name);
+        $this->db->query($sql);
         
         // get the id of the last thing that was inserted
         $insert_id = $this->db->insert_id();
         
-        $sql2 = "INSERT into RECIPESUPPLIES (recipeID, supplyID) VALUES ";
+        $sql2 = "INSERT into RECIPESUPPLIES (recipeID, supplyID, amount) VALUES ";
         $first = TRUE;
-        foreach($ingredients as $ingredient){
+        foreach($ingredients as $key => $value){
             if ($first == TRUE){
                 $first = FALSE;
             } else {
                 $sql2 .= ",";
             }
-            $sql2 .= sprintf("(%d, %d, %d)", $insert_id, $ingredient->id, $ingredient->amount);
+            $sql2 .= sprintf("(%d, %d, %d)", $insert_id, $key, $value);
         }
         
         $this->db->query($sql2);

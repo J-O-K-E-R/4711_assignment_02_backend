@@ -53,11 +53,31 @@ class Administrator extends Application{
     }
 
     public function add_recipe(){
+        $this->data['id'] = null;
+        $this->data['name'] = null;
+        $this->data['supplies'] = $this->supplies->getSupplies();
         $this->data['pagetitle'] = 'Add Recipe';
-        $this->data['pagebody'] = 'add_recipe';
+        $this->data['pagebody'] = 'edit_recipe';
         $this->render();
     }
-    public function delete_recipe($id = null){}
+    public function save_recipe(){
+        $item = new recipes();
+        $item->id = $this->input->post('id');
+        $item->name = $this->input->post('name');
+        $ingredients = array();
+        foreach ($this->supplies->getSupplies() as $supply) {
+            $amount = $this->input->post($supply->id);
+            if ($amount != 0) {
+                $ingredients[$supply->id] = $amount;
+            }
+        }
+        $this->recipes->createRecipe($item,$ingredients);
+        redirect('/administrator/');
+    }
+    public function delete_recipe($id = null){
+        $this->recipes->delete($id);
+        redirect('/administrator/', 'refresh');
+    }
 
     public function add_stock(){
         $this->data['id'] = null;
