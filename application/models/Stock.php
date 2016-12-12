@@ -44,16 +44,23 @@ class Stock extends CI_Model {
         $this->stock[$itemID]['quantity']++;
     }
     
+    public function assembleStock($stockID){
+        
+    }
+    
+    // takes a stock object that looks like it does in the db, runs sql query
     public function create($stock){
         $sql = sprintf("INSERT into STOCK (name, price, quantity) VALUES ('%s', %d, %d)", $stock->name, $stock->price, $stock->quantity);
         $this->db->query($sql);
     }
     
+    // same as above
     public function update($stock){
         $sql = sprintf("UPDATE STOCK set name = '%s', price = %d, quantity = %d where id = %d", $stock->name, $stock->price, $stock->quantity, $stock->id);
         $this->db->query($sql);
     }
     
+    // takes an id, deletes a row from db
     public function delete($id){
         $sql = sprintf("DELETE from STOCK where id = %d", $id);
         $this->db->query($sql);

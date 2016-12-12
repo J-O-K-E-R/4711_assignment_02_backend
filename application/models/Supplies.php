@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Supplies, and accessors.  Also, ways to update the 'database'.  Will be replaced once we have a database.
+ * Supplies, and accessors.  Also, ways to update the database
  */
 class Supplies extends CI_Model {
     
@@ -33,6 +33,7 @@ class Supplies extends CI_Model {
 		$supply[$supplyID]['quantity']++;
 	}
     
+    // decrement the amount of containers of a supply, and increase the onhand
     public function openContainer($supplyID){
         $sql = sprintf("UPDATE SUPPLIES set onHand = onHand += itemsPerContainer, containers -= 1 where id = %d", $supplyID);
         $this->db->query($sql);
