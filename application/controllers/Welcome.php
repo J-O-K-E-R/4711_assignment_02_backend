@@ -12,11 +12,7 @@ class Welcome extends Application{
 	public function index(){
 		$this->load->helper('url');
         $this->data['pagetitle'] = 'Welcome';
-		$this->data['pagebody'] = 'homepage';
-        $this->data['purchases'] = 0;
-        $this->data['sales'] = 0;
-        $this->data['cost'] = 0;
-        $this->data['ingredients'] = 0;
+		$this->data['pagebody'] = 'Go away.';
 		$this->render();
 	}
 }
