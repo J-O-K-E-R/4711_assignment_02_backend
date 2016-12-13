@@ -28,7 +28,7 @@ class Sales extends Application{
             }
                 
             $stock = $this->stock->get($recipe->id);
-            $recipes[] = array('name' => $recipe->name, 'description' => $strIngredients, 'price' => $stock->price);
+            $recipes[] = array('name' => $recipe->name, 'description' => $strIngredients, 'price' => $stock->price, 'id' => $stock->id);
         }
 
         $this->data['sales'] = $recipes;
@@ -36,5 +36,15 @@ class Sales extends Application{
         $this->data['pagetitle'] = 'Sales';
         $this->data['pagebody'] = 'sales';
         $this->render();
+    }
+
+    public function sell(){
+    	foreach ($this->stock->getStock() as $stock) {
+    		$amount = $this->input->post($stock->id);
+    		if ($amount > 0 && $amount <= $stock->quantity) {
+    			$this->stock->sellStock($stock->id,$amount);
+    		}
+    	}
+    	redirect('index.php');
     }
 }
