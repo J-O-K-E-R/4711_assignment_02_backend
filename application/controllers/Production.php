@@ -36,7 +36,7 @@ class Production extends Application{
                 $strIngredients .= ' ' . $ingredient->name;
             }
             
-            $recipes[] = array ('name' => $recipe->name, 'description' => $strIngredients);
+            $recipes[] = array ('name' => $recipe->name, 'description' => $strIngredients, 'id' => $recipe->id);
         }
         $this->data['recipes'] = $recipes;
 
@@ -46,14 +46,16 @@ class Production extends Application{
     }
 
     public function produce(){
-    	foreach ($this->recipes->getRecipes() as $recipe) {
-    		$amount = $this->input->post($recipe->name);
-    		if ($amount > 0) {
+    	$recipes = $this->recipes->getRecipes();
+    	foreach ($recipes as $recipe) {
+    		$amount = $this->input->post($recipe->id);
+    		if ($amount != 0) {
     			$ingredients = $this->recipes->getIngredientAmounts($recipe->id);
     			$flag = true;
     			foreach ($ingredients as $ingredient) {
-    				if ($ingredient->amount * $amount <= $this->supplies->onHand) {
+    				if ($ingredient->amount * $amount > $this->supplies->get($ingredient->id)->onHand) {
     					$flag = false;
+    					break;
     				}
     			}
     			if ($flag) {

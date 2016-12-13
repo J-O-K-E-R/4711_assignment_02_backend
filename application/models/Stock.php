@@ -31,7 +31,7 @@ class Stock extends CI_Model {
 	}
         
     public function buildStock($stockID, $amount){
-        $sql = spritnf("UPDATE supplies s INNER JOIN recipesupplies rs ON rs.supplyID = s.id SET s.onhand = (s.onhand - (rs.amount * %d) WHERE  rs.recipeid = %d", $amount, $stockID);
+        $sql = sprintf("UPDATE supplies s INNER JOIN recipesupplies rs ON rs.supplyID = s.id SET s.onhand = (s.onhand - (rs.amount * %d)) WHERE  rs.recipeid = %d", $amount, $stockID);
         $this->db->query($sql);
         
         $sql2 = sprintf("UPDATE stock SET quantity = quantity + %d where id = %d", $amount, $stockID);
