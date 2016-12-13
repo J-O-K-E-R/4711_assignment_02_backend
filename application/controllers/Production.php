@@ -44,4 +44,23 @@ class Production extends Application{
         $this->data['pagebody'] = 'production';
 		$this->render();
     }
+
+    public function produce(){
+    	foreach ($this->recipes->getRecipes() as $recipe) {
+    		$amount = $this->input->post($recipe->name);
+    		if ($amount > 0) {
+    			$ingredients = $this->recipes->getIngredientAmounts($recipe->id);
+    			$flag = true;
+    			foreach ($ingredients as $ingredient) {
+    				if ($ingredient->amount * $amount <= $this->supplies->onHand) {
+    					$flag = false;
+    				}
+    			}
+    			if ($flag) {
+    				$this->stock->buildStock($recipe->id, $amount);
+    			}
+    		}
+    	}
+    	redirect('index.php');
+    }
 }
