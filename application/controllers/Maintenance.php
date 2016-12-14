@@ -1,7 +1,6 @@
 <?php
 /**
  * REST server for everything!
- *
  * ------------------------------------------------------------------------
  */
 require APPPATH . '/third_party/restful/libraries/Rest_controller.php';
@@ -96,7 +95,7 @@ class Maintenance extends Rest_Controller {
     {
         $key = $this->get('id');
         $record = array_merge(array('id' => $key), $_POST);
-        $this->recipes->create($record);
+        $this->recipes->createRecipe($record->recipe, $record->ingredients, $record->price);
         $this->response(array('ok'), 200);
     }
     
@@ -131,4 +130,7 @@ class Maintenance extends Rest_Controller {
         $this->recipes->delete($key);
         $this->response(array('ok'), 200);
     }
+
+
+
 }
