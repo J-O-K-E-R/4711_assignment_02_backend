@@ -13,14 +13,14 @@ class Supplies extends CI_Model {
     
 	// increments the containers by the amount of containers in a pallet.
 	// should also do something with cost, but dont worry about it for now
-    public function orderSupplies($itemID){
-        $sql = sprintf("UPDATE SUPPLIES set containers = containers += containersPerShipment where id = %d", $itemID);
+    public function orderSupplies($itemID, $amount){
+        $sql = sprintf("UPDATE SUPPLIES set containers = containers + (containersPerShipment * %d) where id = %d", $amount, $itemID);
         $this->db->query($sql);
 	}
 	    
     // decrement the amount of containers of a supply, and increase the onhand
     public function openContainer($supplyID){
-        $sql = sprintf("UPDATE SUPPLIES set onHand += itemsPerContainer, containers -= 1 where id = %d", $supplyID);
+        $sql = sprintf("UPDATE SUPPLIES set onHand = onHand + itemsPerContainer, containers = containers - 1 where id = %d", $supplyID);
         $this->db->query($sql);
     }
 
@@ -35,7 +35,7 @@ class Supplies extends CI_Model {
 	}
 
 	// retrieve all of the supplies
-		public function getSupplies()
+	public function getSupplies()
 	{
 		$sql = sprintf("SELECT * from SUPPLIES");
         $query = $this->db->query($sql);
