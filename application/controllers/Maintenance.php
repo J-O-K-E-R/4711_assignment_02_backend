@@ -77,9 +77,7 @@ class Maintenance extends Rest_Controller {
     // create a supply
     function supplies_post()
     {
-        $key = $this->get('id');
-        $record = array_merge(array('id' => $key), $_POST);
-        $this->supplies->create($record);
+        $this->supplies->create(unserialize($_POST['supply']));
         $this->response(array('ok'), 200);
     }
     // create some stock
@@ -93,28 +91,26 @@ class Maintenance extends Rest_Controller {
     // needs some extra
     function recipes_post()
     {
-        $key = $this->get('id');
-        $record = array_merge(array('id' => $key), $_POST);
-        $this->recipes->createRecipe($record->recipe, $record->ingredients, $record->price);
+        $this->recipes->createRecipe(unserialize($_POST['recipe']), unserialize($_POST['ingredients']), unserialize($_POST['price']));
         $this->response(array('ok'), 200);
     }
     
     // Handle an incoming PUT - update a supply
     function supplies_put()
     {
-        $key = $this->get('id');
-        $record = array_merge(array('id' => $key), $this->_put_args);
-        $this->supplies->update($record);
+        $this->supplies->update(unserialize($this->_put_args['supply']));
         $this->response(array('ok'), 200);
     }
     
-    // actually a 2 in 1, this handles stock and recipe, since they should match 1-1
     function recipes_put()
     {
-        $key = $this->get('id');
-        $record = array_merge(array('id' => $key), $this->_put_args);
-        $this->recipes->updateRecipe($record, $record->ingredients, $record->price);
+        $this->recipes->updateRecipe(unserialize($this->_put_args['recipe']), unserialize($this->_put_args['ingredients']), unserialize($this->_put_args['price']));
         $this->response(array('ok'), 200);
+    }
+
+    function stock_put(){
+    	$this->stock->update(unserialize($this->_put_args['stock']));
+    	$this->response(array('ok'), 200);
     }
         
     // delete a supply
