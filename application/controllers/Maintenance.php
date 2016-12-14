@@ -131,6 +131,10 @@ class Maintenance extends Rest_Controller {
         $this->response(array('ok'), 200);
     }
 
-
-
+    function recieve_put(){
+        $id = $this->get('id');
+        $amount = $this->get('amount');
+        $this->supplies->orderSupplies($id, $amount);
+        $this->response(array('ok'), 200);
+    }
 }
