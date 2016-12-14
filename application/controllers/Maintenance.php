@@ -127,7 +127,7 @@ class Maintenance extends Rest_Controller {
     function recipes_delete()
     {
         $key = $this->get('id');
-        $this->recipes->delete($key);
+        $this->recipes->deleteRecipe($key);
         $this->response(array('ok'), 200);
     }
 
